@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
-import android.widget.RelativeLayout;
-import android.app.Activity;
-import android.graphics.Color;
+//import android.widget.RelativeLayout;
+//import android.app.Activity;
+//import android.graphics.Color;
+import android.util.Log;
+import android.app.Application.ActivityLifecycleCallbacks;
+import android.app.Activity.*;
 
-
+//timing the activity upon leaving app is importat. extend app compat may help with that.
 
 public class MainActivity extends AppCompatActivity {
     private Button startButton;
@@ -31,7 +34,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
+    long userInteractionTime = 0;
+
+    public void onUserLeaveHint() {
+        long uiDelta = (System.currentTimeMillis() - userInteractionTime);
+
+        super.onUserLeaveHint();
+        Log.i("There","Last User Interaction = "+uiLag);
+        if (uiDelta < 100)
+            Log.i("Bloom","To home");
+        else
+            Log.i("Bloom","Leave app rn...");
+    }
+
+    public void onUserInteraction() {
+        userInteractionTime = System.currentTimeMillis();
+        super.onUserInteraction();
+        Log.i("Bloom","Interaction");
+    }
+
+    public void onActivityDestroyed() {
+        Log.d(TAG, "onActivityDestroyed: ");
+    }
+
 }
