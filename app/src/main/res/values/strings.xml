@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Bloom</string>
     <string name="action_settings">Settings</string>
+
+    <string name="dnd_dialog_message">The App needs permission to access Do Not Disturb</string>
+    <string name="dnd_dialog_title">Do Not Disturb access needed</string>
+    <string name="dnd_dialog_allow">Allow</string>
+    <string name="dnd_dialog_cancel">Do not allow</string>
+    <string name="ok">OK</string>
 </resources>
