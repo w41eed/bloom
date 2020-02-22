@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
-import android.widget.RelativeLayout;
-import android.app.Activity;
-import android.graphics.Color;
 
 
 
@@ -25,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // open a new activity
-                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                Intent intent = new Intent(MainActivity.this, MainHomepage.class);
                 startActivity(intent);
 
             }

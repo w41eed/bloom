@@ -21,5 +21,7 @@
         android:background="@drawable/custom_buttom"
         android:text="Get Started"
         android:textColor="#158a40"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>
