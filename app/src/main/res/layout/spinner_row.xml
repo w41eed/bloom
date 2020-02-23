@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_view_icon"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:background="#ffffff"
+        android:src="@drawable/study" />
+
+    <TextView
+        android:id="@+id/text_view_todo"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_alignBottom="@+id/image_view_icon"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="87dp"
+        android:layout_marginLeft="87dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="3dp"
+        android:layout_toEndOf="@+id/image_view_icon"
+        android:layout_toRightOf="@+id/image_view_icon"
+        android:gravity="center"
+        android:text="Study"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:typeface="serif" />
+
+
+</RelativeLayout>

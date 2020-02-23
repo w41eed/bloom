@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
+<<<<<<< HEAD
 //import android.widget.RelativeLayout;
 //import android.app.Activity;
 //import android.graphics.Color;
 import android.util.Log;
 import android.app.Application.ActivityLifecycleCallbacks;
 import android.app.Activity.*;
+=======
+
+>>>>>>> homepage
 
 //timing the activity upon leaving app is importat. extend app compat may help with that.
 
@@ -28,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // open a new activity
-                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                Intent intent = new Intent(MainActivity.this, MainHomepage.class);
                 startActivity(intent);
 
             }
