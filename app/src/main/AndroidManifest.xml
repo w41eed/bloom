@@ -3,6 +3,7 @@
     package="com.bloom">
 
     <application
+        android:name=".FlowerGlobalClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
         <activity android:name=".MainHomepage"></activity>
+
+
+        <activity android:name=".SummaryActivity"></activity>
+        <activity android:name=".TimeCountDownActivity" />
+        <activity android:name=".FlowerAliveActivity" />
+        <activity android:name=".FlowerDeadActivity" />
+        <activity android:name=".Main2Activity" />
 
         <activity
             android:name=".MainActivity"

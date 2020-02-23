@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    tools:context=".SummaryActivity">
+
+    <TextView
+        android:id="@+id/deadFlower_TextView"
+        android:layout_width="194dp"
+        android:layout_height="83dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="457dp"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="3"
+        android:text="You have n withered sunflower in your garden"
+        android:textColor="#616875"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/healthyFlower_TextView"
+        android:layout_width="192dp"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="170dp"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="3"
+        android:text="You have n healthy sunflower in your garden"
+        android:textColor="#616875"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

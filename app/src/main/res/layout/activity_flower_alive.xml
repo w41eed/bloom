@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sunflower_level3"
+    tools:context=".FlowerAliveActivity">
+
+    <TextView
+        android:layout_width="331dp"
+        android:layout_height="99dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="93dp"
+        android:shadowColor="@android:color/darker_gray"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="5"
+        android:text="Congratulations! You have planted a virtual flower into your garden."
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_goBackToSetTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="288dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/custom_buttom"
+        android:text="Back"
+        android:textColor="#158a40"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/SummaryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/custom_buttom"
+        android:text="Summary"
+        android:textColor="#158a40"
+        android:textSize="15sp" />
+
+</RelativeLayout>

@@ -1,6 +1,6 @@
 package com.bloom;
 
-public class ToDoItem {
+public class gitToDoItem {
     private String WhatToDo;
     private int IconImage;
 
