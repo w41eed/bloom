@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onUserLeaveHint() {
         long uiDelta = (System.currentTimeMillis() - userInteractionTime);
-
+        long uiLag = 5000;
         super.onUserLeaveHint();
         Log.i("There","Last User Interaction = "+uiLag);
         if (uiDelta < 100)
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onActivityDestroyed() {
-        Log.d(TAG, "onActivityDestroyed: ");
+        Log.d("destroyed", "onActivityDestroyed: ");
     }
 
 }
