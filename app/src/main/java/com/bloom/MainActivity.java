@@ -3,19 +3,12 @@ package com.bloom;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
-<<<<<<< HEAD
-//import android.widget.RelativeLayout;
-//import android.app.Activity;
-//import android.graphics.Color;
 import android.util.Log;
-import android.app.Application.ActivityLifecycleCallbacks;
-import android.app.Activity.*;
-=======
 
->>>>>>> homepage
 
 //timing the activity upon leaving app is importat. extend app compat may help with that.
 
