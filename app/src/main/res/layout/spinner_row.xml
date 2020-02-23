@@ -3,8 +3,8 @@
 
     <ImageView
         android:id="@+id/image_view_icon"
-        android:layout_width="80dp"
-        android:layout_height="60dp"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
         android:padding="5dp"
         android:background="#ffffff"
         android:src="@drawable/study" />

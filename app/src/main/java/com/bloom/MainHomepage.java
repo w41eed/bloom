@@ -30,8 +30,8 @@ public class MainHomepage extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ToDoItem clickedItem = (ToDoItem) parent.getItemAtPosition(position);
-                String clickedCountryName = clickedItem.getWhatToDo();
-                Toast.makeText(MainHomepage.this, clickedCountryName + " selected", Toast.LENGTH_SHORT).show();
+                String clickedThing = clickedItem.getWhatToDo();
+                Toast.makeText(MainHomepage.this, clickedThing + " selected", Toast.LENGTH_SHORT).show();
             }
 
             @Override
