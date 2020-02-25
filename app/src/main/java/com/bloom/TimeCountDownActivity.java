@@ -11,7 +11,8 @@ import java.sql.Time;
 import java.util.Locale;
 import android.widget.Toast;
 import android.content.Intent;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TimeCountDownActivity extends AppCompatActivity implements TimerCancelDialog.TimerCancelDialogListener {
 
@@ -22,6 +23,10 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     private boolean CD_is_timer_running;
     private long CD_time_left_in_Misecond = INIT_TIMER_IN_MISECOND;
 
+    private Timer detectAway;
+    private TimerTask detectAwayTask;
+    public boolean away;
+    private final long COME_BACK_OR_ELSE_MS = 2000;
 
 
     @Override
@@ -83,6 +88,43 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
 
     }
+
+    public void startDetectAwayTimer() {
+        this.detectAway = new Timer();
+        this.detectAwayTask = new TimerTask() {
+            public void run() {
+                TimeCountDownActivity.this.away = true;
+            }
+        };
+        this.detectAway.schedule(detectAwayTask, COME_BACK_OR_ELSE_MS);
+    }
+
+    public void stopStartDetectAwayTimer() {
+        if (this.detectAwayTask != null) this.detectAwayTask.cancel();
+        if (this.detectAway != null) this.detectAway.cancel();
+        this.away = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (this.away) {
+            Timer.cancel();
+            CD_is_timer_running = false;
+            FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();
+            flowerClass.increaseDeadFlowerNum();
+            Intent intent = new Intent(TimeCountDownActivity.this, FlowerDeadActivity.class);
+            startActivity(intent);
+        }
+        this.stopStartDetectAwayTimer();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.startDetectAwayTimer();
+    }
+
     private void warning_PopUp(){
 
 
