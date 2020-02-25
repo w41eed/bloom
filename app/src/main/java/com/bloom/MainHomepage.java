@@ -1,9 +1,11 @@
 package com.bloom;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -13,11 +15,21 @@ public class MainHomepage extends AppCompatActivity {
 
     private ArrayList<ToDoItem> ToDoList;
     private ToDoAdapter mAdapter;
+    private Button NextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+        NextButton = findViewById(R.id.button2);
+        NextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // open a new activity
+                Intent intent = new Intent(MainHomepage.this, Main2Activity.class);
+                startActivity(intent);
+            }
+        });
 
         initList();
 
