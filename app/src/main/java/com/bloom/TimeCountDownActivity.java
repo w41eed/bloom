@@ -31,7 +31,8 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         CD_textview = findViewById(R.id.count_down_timer);
         CD_startButton = findViewById(R.id.button_start_timer);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);}
         //get input time and display to clock
         Intent intent = getIntent();
         long ms_input = intent.getLongExtra(Main2Activity.MIN_INPUT,0);
