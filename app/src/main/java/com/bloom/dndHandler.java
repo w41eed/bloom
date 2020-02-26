@@ -15,7 +15,7 @@ import static java.sql.Types.NULL;
 
     public class dndHandler {
 
-        public boolean dndPermission = false;
+        private boolean dndPermission;
         private NotificationManager nManager;
         private Activity mainActivity;
 
@@ -24,7 +24,9 @@ import static java.sql.Types.NULL;
         //Use inside onCreate of MainActivity
         public dndHandler(Activity activity){
             mainActivity = activity;
+            dndPermission = false;
             nManager = (NotificationManager) mainActivity.getSystemService(Context.NOTIFICATION_SERVICE);
+
         }
 
 
@@ -32,6 +34,8 @@ import static java.sql.Types.NULL;
         //If no access then prompts user to give permission
         //Call every time before you access Do not disturb
         public void checkDndPermission(){
+
+            //NotificationManager nManager = (NotificationManager) mainActivity.getSystemService(Context.NOTIFICATION_SERVICE);
 
             if (!nManager.isNotificationPolicyAccessGranted()) {
                 dndPermission = false;
@@ -76,13 +80,23 @@ import static java.sql.Types.NULL;
 
         //Will turn ON Do Not Disturb
         public void turnOnDnd(){
-            nManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+
+            checkDndPermission();
+            if(dndPermission) {
+                //NotificationManager nManager = (NotificationManager) mainActivity.getSystemService(Context.NOTIFICATION_SERVICE);
+                nManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+            }
         }
 
 
         //Will turn OFF Do Not Disturb
-        public void turnOffDnd(){
-            nManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+        public void turnOffDnd() {
+
+            checkDndPermission();
+            if (dndPermission) {
+                //NotificationManager nManager = (NotificationManager) mainActivity.getSystemService(Context.NOTIFICATION_SERVICE);
+                nManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+            }
         }
 
 

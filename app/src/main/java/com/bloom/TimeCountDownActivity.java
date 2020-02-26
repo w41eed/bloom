@@ -1,16 +1,15 @@
 package com.bloom;
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
-
-import java.sql.Time;
 import java.util.Locale;
-import android.widget.Toast;
 import android.content.Intent;
+import static java.sql.Types.NULL;
 
 
 public class TimeCountDownActivity extends AppCompatActivity implements TimerCancelDialog.TimerCancelDialogListener {
@@ -21,6 +20,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     private Button CD_startButton;
     private boolean CD_is_timer_running;
     private long CD_time_left_in_Misecond = INIT_TIMER_IN_MISECOND;
+    private dndHandler dnd;
 
 
 
@@ -31,7 +31,16 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         CD_textview = findViewById(R.id.count_down_timer);
         CD_startButton = findViewById(R.id.button_start_timer);
 
+        //Check for dnd access
+        dnd = new dndHandler(this);
+        dnd.checkDndPermission();
+
+
+
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //get input time and display to clock
         Intent intent = getIntent();
         long ms_input = intent.getLongExtra(Main2Activity.MIN_INPUT,0);
@@ -71,14 +80,21 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();
                 flowerClass.increaseAliveFlowerNum();
 
+                //Turn off Do not Disturb after timer ends
+                dnd.turnOffDnd();
+
                 Intent intent = new Intent(TimeCountDownActivity.this, FlowerAliveActivity.class);
                 startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                overridePendingTransition(NULL, NULL);
                 //UpdateScreen();
 
             }
         }.start(); //as soon as start button is clicked,  new timer is created and start to count down
         CD_is_timer_running = true;
+
+        //Turn on Do not Disturb after timer starts
+        dnd.turnOnDnd();
+
         UpdateScreen();
 
 
@@ -98,8 +114,13 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();
 
         flowerClass.increaseDeadFlowerNum();
+
+        //Turn off Do not Disturb
+        dnd.turnOffDnd();
+
         Intent intent = new Intent(TimeCountDownActivity.this, FlowerDeadActivity.class);
         startActivity(intent);
+        overridePendingTransition(NULL, NULL);
     }
     //set input time to count down timer
     private void set_Time_CD(long ms){
