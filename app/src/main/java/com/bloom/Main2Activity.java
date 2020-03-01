@@ -18,6 +18,7 @@ public class Main2Activity extends AppCompatActivity {
     private SeekBar min_seekBar;
     private TextView min_textView;
     private Button CD_setMinButton;
+    private dndHandler dnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,9 @@ public class Main2Activity extends AppCompatActivity {
         min_seekBar = findViewById(R.id.minute_seekBar);
         min_textView = findViewById(R.id.minute_textView);
         CD_setMinButton = findViewById(R.id.minute_button_set);
+
+        dnd = new dndHandler(this);
+        dnd.checkDndPermission();
 
         min_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

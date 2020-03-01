@@ -42,7 +42,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
         //Check for dnd access
         dnd = new dndHandler(this);
-        dnd.checkDndPermission();
+
 
 
 
