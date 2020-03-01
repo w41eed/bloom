@@ -28,6 +28,7 @@ public class MainHomepage extends AppCompatActivity {
                 // open a new activity
                 Intent intent = new Intent(MainHomepage.this, Main2Activity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -43,7 +44,7 @@ public class MainHomepage extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ToDoItem clickedItem = (ToDoItem) parent.getItemAtPosition(position);
                 String clickedCountryName = clickedItem.getWhatToDo();
-                Toast.makeText(MainHomepage.this, clickedCountryName + " selected", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainHomepage.this, clickedCountryName + " selected", Toast.LENGTH_SHORT).show();
             }
 
             @Override

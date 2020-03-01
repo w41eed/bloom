@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.content.Intent;
 import android.util.Log;
 
+import static java.sql.Types.NULL;
+
 
 //timing the activity upon leaving app is importat. extend app compat may help with that.
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 // open a new activity
                 Intent intent = new Intent(MainActivity.this, MainHomepage.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
 
             }
         });

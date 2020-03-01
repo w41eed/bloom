@@ -9,6 +9,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static java.sql.Types.NULL;
+
 public class Main2Activity extends AppCompatActivity {
 
 
@@ -70,5 +72,7 @@ public class Main2Activity extends AppCompatActivity {
 
         intent.putExtra(MIN_INPUT, ms_input);
         startActivity(intent);
+        overridePendingTransition(NULL,NULL);
     }
 }
+

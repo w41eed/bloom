@@ -38,8 +38,9 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
 
 
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         //get input time and display to clock
         Intent intent = getIntent();
