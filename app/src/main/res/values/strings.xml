@@ -7,4 +7,5 @@
     <string name="dnd_dialog_allow">Allow</string>
     <string name="dnd_dialog_cancel">Do not allow</string>
     <string name="ok">OK</string>
+    <string name="whatToDo">Pick an activity</string>
 </resources>
