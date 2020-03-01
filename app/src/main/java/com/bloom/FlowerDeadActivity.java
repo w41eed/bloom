@@ -23,7 +23,7 @@ public class FlowerDeadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(FlowerDeadActivity.this, Main2Activity.class);
+                Intent intent = new Intent(FlowerDeadActivity.this, MainHomepage.class);
                 startActivity(intent);
             }
         }

@@ -1,7 +1,9 @@
 package com.bloom;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class SummaryActivity extends AppCompatActivity {
@@ -17,4 +19,13 @@ public class SummaryActivity extends AppCompatActivity {
         text_healthy.setText("You have "+flowerClass.getAliveFlowerNum()+" healthy sunflower in your garden");
 
     }
+
+    public void goHome(View view){
+        Intent intent = new Intent(SummaryActivity.this, MainHomepage.class);
+        startActivity(intent);
+        overridePendingTransition(0,0);
+    }
+
+
+
 }
