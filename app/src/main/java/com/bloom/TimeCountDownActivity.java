@@ -42,7 +42,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
         //Check for dnd access
         dnd = new dndHandler(this);
-
+        dnd.checkDndPermission();
 
 
 
@@ -129,15 +129,20 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     @Override
     public void onResume() {
         super.onResume();
-        if (this.away) {
-            Timer.cancel();
-            CD_is_timer_running = false;
-            FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();
-            flowerClass.increaseDeadFlowerNum();
-            Intent intent = new Intent(TimeCountDownActivity.this, FlowerDeadActivity.class);
-            startActivity(intent);
+        if(CD_is_timer_running) {
+            if (this.away) {
+                Timer.cancel();
+                CD_is_timer_running = false;
+                FlowerGlobalClass flowerClass = (FlowerGlobalClass) getApplicationContext();
+                flowerClass.increaseDeadFlowerNum();
+
+                dnd.turnOffDnd();
+
+                Intent intent = new Intent(TimeCountDownActivity.this, FlowerDeadActivity.class);
+                startActivity(intent);
+            }
+            this.stopStartDetectAwayTimer();
         }
-        this.stopStartDetectAwayTimer();
     }
 
     @Override

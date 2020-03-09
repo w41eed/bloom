@@ -81,22 +81,22 @@ import static java.sql.Types.NULL;
         //Will turn ON Do Not Disturb
         public void turnOnDnd(){
 
-            //checkDndPermission();
-            //if(dndPermission) {
+            checkDndPermission();
+            if(dndPermission) {
                 //NotificationManager nManager = (NotificationManager) mainActivity.getSystemService(Context.NOTIFICATION_SERVICE);
                 nManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
-            //}
+            }
         }
 
 
         //Will turn OFF Do Not Disturb
         public void turnOffDnd() {
 
-            //checkDndPermission();
-            //if (dndPermission) {
+            checkDndPermission();
+            if (dndPermission) {
                 //NotificationManager nManager = (NotificationManager) mainActivity.getSystemService(Context.NOTIFICATION_SERVICE);
                 nManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
-            //}
+            }
         }
 
 

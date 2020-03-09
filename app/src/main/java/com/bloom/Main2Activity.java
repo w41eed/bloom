@@ -28,8 +28,8 @@ public class Main2Activity extends AppCompatActivity {
         min_textView = findViewById(R.id.minute_textView);
         CD_setMinButton = findViewById(R.id.minute_button_set);
 
-        dnd = new dndHandler(this);
-        dnd.checkDndPermission();
+        //dnd = new dndHandler(this);
+        //dnd.checkDndPermission();
 
         min_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
