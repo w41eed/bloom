@@ -147,9 +147,14 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         schedule_timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                start_Timer();
+                TimeCountDownActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        start_Timer();
+                    }
+                });
             }
-        }, 5000);
+        },5000);
 
 
 
@@ -245,6 +250,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         if (CD_is_timer_running){
 
             CD_startButton.setText("CANCEL");
+            CD_startButton.setVisibility(View.VISIBLE);
 
         }
         else { //the only case for not running: time = 0
