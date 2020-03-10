@@ -17,6 +17,7 @@ import static java.sql.Types.NULL;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 public class TimeCountDownActivity extends AppCompatActivity implements TimerCancelDialog.TimerCancelDialogListener {
 
     private long INIT_TIMER_IN_MISECOND; // receive custom input
@@ -32,6 +33,12 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     public boolean away;
     private final long COME_BACK_OR_ELSE_MS = 2000;
 
+    // *** new stuff ***
+
+    private Button CD_breakButton;
+    private Timer schedule_timer; //timer for schedule tasks
+    // **************
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,9 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         setContentView(R.layout.activity_time_count_down);
         CD_textview = findViewById(R.id.count_down_timer);
         CD_startButton = findViewById(R.id.button_start_timer);
+        // *** new stuff ***
+        CD_breakButton = findViewById(R.id.button_take_a_break);
+        // *****************
 
         //Check for dnd access
         dnd = new dndHandler(this);
@@ -69,6 +79,21 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
             }
         });
+
+        // *** new stuff ***
+        CD_breakButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (CD_is_timer_running){ //if timer is running while click break button: take a break for 5 mins
+                    //if timer is already paused and click break button: nothing happens
+                    take_a_break();
+
+                }
+
+            }
+        });
+
+        // *****************
 
     }
 
@@ -109,6 +134,27 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
 
     }
+
+    // *** new stuff ***
+    private void take_a_break(){
+        //cancel the timer, create a new one after 5 minutes
+        Timer.cancel();
+        CD_is_timer_running = false;
+        UpdateScreen();
+
+        //after 5 minutes,restart timer(5 s for testing)
+        schedule_timer = new Timer();
+        schedule_timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                start_Timer();
+            }
+        }, 5000);
+
+
+
+    }
+    // **************
 
     public void startDetectAwayTimer() {
         this.detectAway = new Timer();
