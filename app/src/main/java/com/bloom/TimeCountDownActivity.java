@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Button;
 
@@ -237,6 +238,16 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     }
 
     private void updateCountDownText(){
+        RelativeLayout r = findViewById(R.id.nothing);
+        if ((CD_time_left_in_Misecond < (0.75) * INIT_TIMER_IN_MISECOND) &&
+                ((0.50) * INIT_TIMER_IN_MISECOND < CD_time_left_in_Misecond))
+            r.setBackgroundResource(R.drawable.sunflower_level1);
+        else if ( ((0.25) * INIT_TIMER_IN_MISECOND < CD_time_left_in_Misecond) &&
+                (CD_time_left_in_Misecond < (0.50) * INIT_TIMER_IN_MISECOND))
+            r.setBackgroundResource(R.drawable.sunflower_level2);
+        else if ( 0 < CD_time_left_in_Misecond &&
+                (CD_time_left_in_Misecond < (0.25) * INIT_TIMER_IN_MISECOND))
+            r.setBackgroundResource(R.drawable.sunflower_level3);
         //count down in hours
         int hours = (int)(CD_time_left_in_Misecond/1000)/3600;
         //count down in minutes

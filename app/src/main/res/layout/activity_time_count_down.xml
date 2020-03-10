@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sunflower_level1"
-    tools:context=".TimeCountDownActivity">
+    android:background="@drawable/background1"
+    tools:context=".TimeCountDownActivity"
+    android:id="@+id/nothing">
+
     <TextView
         android:id="@+id/count_down_timer"
         android:layout_width="342dp"
