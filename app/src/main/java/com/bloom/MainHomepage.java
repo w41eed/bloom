@@ -2,12 +2,12 @@ package com.bloom;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -32,6 +32,10 @@ public class MainHomepage extends AppCompatActivity {
             }
         });
 
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        ImageAdapter adapter = new ImageAdapter(this);
+        viewPager.setAdapter(adapter);
+
         initList();
 
         Spinner spinnerCountries = findViewById(R.id.spinner1);
@@ -43,8 +47,53 @@ public class MainHomepage extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ToDoItem clickedItem = (ToDoItem) parent.getItemAtPosition(position);
-                String clickedCountryName = clickedItem.getWhatToDo();
-                //Toast.makeText(MainHomepage.this, clickedCountryName + " selected", Toast.LENGTH_SHORT).show();
+                String clickedItemName = clickedItem.getWhatToDo();
+
+/*
+                FileOutputStream fOut = null;
+                try {
+                    fOut = openFileOutput("tag",MODE_PRIVATE);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fOut.write(clickedItemName.getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fOut.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                FileInputStream fin = null;
+                try {
+                    fin = openFileInput("tag");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                int c = -1;
+                String temp="";
+                while(true){
+                    try {
+                        if (!((c = fin.read()) != -1)) break;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    temp = temp + (char) c;
+                }
+                String testdata = temp;
+                try {
+                    fin.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                Toast.makeText(MainHomepage.this, testdata + " selected", Toast.LENGTH_SHORT).show();*/
             }
 
             @Override
