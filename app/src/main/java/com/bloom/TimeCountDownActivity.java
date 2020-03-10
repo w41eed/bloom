@@ -32,6 +32,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     private TimerTask detectAwayTask;
     public boolean away;
     private final long COME_BACK_OR_ELSE_MS = 2000;
+    private boolean on_break;
 
     // *** new stuff ***
 
@@ -140,6 +141,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         //cancel the timer, create a new one after 5 minutes
         Timer.cancel();
         CD_is_timer_running = false;
+        on_break = true;
         UpdateScreen();
 
         //after 5 minutes,restart timer(5 s for testing)
@@ -150,12 +152,12 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 TimeCountDownActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        on_break = false;
                         start_Timer();
                     }
                 });
             }
-        },5000);
-
+        },10000);
 
 
     }
@@ -180,7 +182,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     @Override
     public void onResume() {
         super.onResume();
-        if (this.away) {
+        if (this.away && !on_break) {
             Timer.cancel();
             CD_is_timer_running = false;
             FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();
@@ -194,7 +196,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     @Override
     public void onPause() {
         super.onPause();
-        this.startDetectAwayTimer();
+        if (!on_break) this.startDetectAwayTimer();
     }
 
     private void warning_PopUp(){
