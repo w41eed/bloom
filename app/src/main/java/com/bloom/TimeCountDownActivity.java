@@ -46,6 +46,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         /*if((myPrefs.getString("alive_flower",null) == null) || (myPrefs.getInt("dead_flower",0) == 0))
         {*/
             editor = myPrefs.edit();
+
             editor.putString("alive_flower", "0");
             editor.commit();
             editor.putString("dead_flower", "0");
