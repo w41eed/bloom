@@ -29,26 +29,13 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/BackButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="288dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/custom_buttom"
-        android:text="Back"
-        android:textColor="#158a40"
-        android:textSize="15sp" />
-
-    <Button
         android:id="@+id/SummaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="163dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/custom_buttom"
         android:text="Summary"
         android:textColor="#158a40"
