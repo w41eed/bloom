@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sunflower_level1"
-    tools:context=".TimeCountDownActivity">
+    android:background="@drawable/background1"
+    tools:context=".TimeCountDownActivity"
+    android:id="@+id/nothing">
+
     <TextView
         android:id="@+id/count_down_timer"
         android:layout_width="342dp"
@@ -27,16 +29,31 @@
 
     <Button
         android:id="@+id/button_start_timer"
-        android:layout_width="201dp"
-        android:layout_height="wrap_content"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="104dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="75dp"
-        android:background="@drawable/custom_buttom"
-        android:text="Start Timer"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="286dp"
+        android:layout_marginBottom="267dp"
+        android:background="@drawable/custom_round_button2"
+        android:text="Start"
+        android:textColor="#158a40"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/button_take_a_break"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="286dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="267dp"
+        android:background="@drawable/custom_round_button2"
+        android:text="Break"
         android:textColor="#158a40"
         android:textSize="20sp" />
 

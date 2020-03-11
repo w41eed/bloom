@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Button;
 
@@ -17,6 +18,7 @@ import static java.sql.Types.NULL;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 
 public class TimeCountDownActivity extends AppCompatActivity implements TimerCancelDialog.TimerCancelDialogListener {
 
@@ -33,6 +35,13 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     private TimerTask detectAwayTask;
     public boolean away;
     private final long COME_BACK_OR_ELSE_MS = 2000;
+    private boolean on_break;
+
+    // *** new stuff ***
+
+    private Button CD_breakButton;
+    private Timer schedule_timer; //timer for schedule tasks
+    // **************
 
 
     @Override
@@ -41,6 +50,9 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         setContentView(R.layout.activity_time_count_down);
         CD_textview = findViewById(R.id.count_down_timer);
         CD_startButton = findViewById(R.id.button_start_timer);
+        // *** new stuff ***
+        CD_breakButton = findViewById(R.id.button_take_a_break);
+        // *****************
 
         //Check for dnd access
         dnd = new dndHandler(this);
@@ -73,6 +85,21 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
             }
         });
+
+        // *** new stuff ***
+        CD_breakButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (CD_is_timer_running){ //if timer is running while click break button: take a break for 5 mins
+                    //if timer is already paused and click break button: nothing happens
+                    take_a_break();
+
+                }
+
+            }
+        });
+
+        // *****************
 
     }
 
@@ -114,6 +141,33 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
     }
 
+    // *** new stuff ***
+    private void take_a_break(){
+        //cancel the timer, create a new one after 5 minutes
+        Timer.cancel();
+        CD_is_timer_running = false;
+        on_break = true;
+        UpdateScreen();
+
+        //after 5 minutes,restart timer(5 s for testing)
+        schedule_timer = new Timer();
+        schedule_timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                TimeCountDownActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        on_break = false;
+                        start_Timer();
+                    }
+                });
+            }
+        },10000);
+
+
+    }
+    // **************
+
     public void startDetectAwayTimer() {
         this.detectAway = new Timer();
         this.detectAwayTask = new TimerTask() {
@@ -134,7 +188,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     public void onResume() {
         super.onResume();
         if(CD_is_timer_running) {
-            if (this.away) {
+            if (this.away && !on_break) {
                 Timer.cancel();
                 CD_is_timer_running = false;
                 FlowerGlobalClass flowerClass = (FlowerGlobalClass) getApplicationContext();
@@ -147,12 +201,14 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
             }
             this.stopStartDetectAwayTimer();
         }
+
+        this.stopStartDetectAwayTimer();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        this.startDetectAwayTimer();
+        if (!on_break) this.startDetectAwayTimer();
     }
 
     private void warning_PopUp(){
@@ -193,6 +249,16 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     }
 
     private void updateCountDownText(){
+        RelativeLayout r = findViewById(R.id.nothing);
+        if ((CD_time_left_in_Misecond < (0.75) * INIT_TIMER_IN_MISECOND) &&
+                ((0.50) * INIT_TIMER_IN_MISECOND < CD_time_left_in_Misecond))
+            r.setBackgroundResource(R.drawable.sunflower_level1);
+        else if ( ((0.25) * INIT_TIMER_IN_MISECOND < CD_time_left_in_Misecond) &&
+                (CD_time_left_in_Misecond < (0.50) * INIT_TIMER_IN_MISECOND))
+            r.setBackgroundResource(R.drawable.sunflower_level2);
+        else if ( 0 < CD_time_left_in_Misecond &&
+                (CD_time_left_in_Misecond < (0.25) * INIT_TIMER_IN_MISECOND))
+            r.setBackgroundResource(R.drawable.sunflower_level3);
         //count down in hours
         int hours = (int)(CD_time_left_in_Misecond/1000)/3600;
         //count down in minutes
@@ -208,6 +274,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         if (CD_is_timer_running){
 
             CD_startButton.setText("CANCEL");
+            CD_startButton.setVisibility(View.VISIBLE);
 
         }
         else { //the only case for not running: time = 0
