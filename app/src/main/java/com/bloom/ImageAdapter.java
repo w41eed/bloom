@@ -10,7 +10,7 @@ import android.widget.Toast;
 public class ImageAdapter extends PagerAdapter {
 
     private Context mContext;
-    private int[] ImageId = new int[] {R.mipmap.f1/*,R.drawable.f2,R.drawable.f3*/};
+    private int[] ImageId = new int[] {R.drawable.f1,R.drawable.f2/*R.drawable.f3*/};
     ImageAdapter(Context context){
         mContext = context;
     }
@@ -32,13 +32,23 @@ public class ImageAdapter extends PagerAdapter {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //SharedPreferences myPrefs;
+                //myPrefs = getSharedPreferences("tagpage", MODE_PRIVATE);
+                //SharedPreferences.Editor editor = myPrefs.edit();
+
                 if(position == 0){
+                    //editor.putString("flower_type", "f1");
+                    //editor.commit();
                     Toast.makeText(mContext,"f1 selected",Toast.LENGTH_SHORT).show();
                 }
                 else if(position == 0){
+                    //editor.putString("flower_type", "f2");
+                    //editor.commit();
                     Toast.makeText(mContext,"f2 selected",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    //editor.putString("flower_type", "f3");
+                    //editor.commit();
                     Toast.makeText(mContext,"f3 selected",Toast.LENGTH_SHORT).show();
                 }
 

@@ -1,6 +1,7 @@
 package com.bloom;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -38,62 +39,23 @@ public class MainHomepage extends AppCompatActivity {
 
         initList();
 
-        Spinner spinnerCountries = findViewById(R.id.spinner1);
+        Spinner spinnertag = findViewById(R.id.spinner1);
 
         mAdapter = new ToDoAdapter(this, ToDoList);
-        spinnerCountries.setAdapter(mAdapter);
+        spinnertag.setAdapter(mAdapter);
 
-        spinnerCountries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnertag.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ToDoItem clickedItem = (ToDoItem) parent.getItemAtPosition(position);
                 String clickedItemName = clickedItem.getWhatToDo();
 
-/*
-                FileOutputStream fOut = null;
-                try {
-                    fOut = openFileOutput("tag",MODE_PRIVATE);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    fOut.write(clickedItemName.getBytes());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    fOut.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-                FileInputStream fin = null;
-                try {
-                    fin = openFileInput("tag");
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                int c = -1;
-                String temp="";
-                while(true){
-                    try {
-                        if (!((c = fin.read()) != -1)) break;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    temp = temp + (char) c;
-                }
-                String testdata = temp;
-                try {
-                    fin.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-                Toast.makeText(MainHomepage.this, testdata + " selected", Toast.LENGTH_SHORT).show();*/
+                SharedPreferences myPrefs;
+                myPrefs = getSharedPreferences("tagpage", MODE_PRIVATE);
+                SharedPreferences.Editor editor = myPrefs.edit();
+                editor.putString("curr_tag", clickedItemName);//store the current last selected tag
+                editor.commit();
+                //Toast.makeText(MainHomepage.this, testdata + " selected", Toast.LENGTH_SHORT).show();*/
             }
 
             @Override

@@ -1,7 +1,6 @@
 package com.bloom;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,8 +30,9 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     private TimerTask detectAwayTask;
     public boolean away;
     private final long COME_BACK_OR_ELSE_MS = 2000;
-    SharedPreferences myPrefs;
-    SharedPreferences.Editor editor;
+    SharedPreferences myPrefs; //= getSharedPreferences("prefID", MODE_PRIVATE);
+    SharedPreferences.Editor editor; //editor = myPrefs.edit();;
+    SharedPreferences thePrefs;//this is for tag page
 
 
 
@@ -42,16 +42,18 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         setContentView(R.layout.activity_time_count_down);
         CD_textview = findViewById(R.id.count_down_timer);
         CD_startButton = findViewById(R.id.button_start_timer);
-        myPrefs = getSharedPreferences("prefID", Context.MODE_PRIVATE);
-        /*if((myPrefs.getString("alive_flower",null) == null) || (myPrefs.getInt("dead_flower",0) == 0))
-        {*/
+        myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
+        //!sharedPreferences.getString(NAME,"Default value").equals("Default value")
+        if(myPrefs.getString("alive_flower","Infinite").equals( "Infinite")) {
             editor = myPrefs.edit();
 
             editor.putString("alive_flower", "0");
             editor.commit();
             editor.putString("dead_flower", "0");
             editor.commit();
-
+            //editor.putString("modify", "yes");
+            //editor.commit();
+        }
 
         //Check for dnd access
         dnd = new dndHandler(this);
@@ -68,6 +70,12 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         Intent intent = getIntent();
         long ms_input = intent.getLongExtra(Main2Activity.MIN_INPUT,0);
         set_Time_CD(ms_input);
+        long min_input = ms_input/60000; // convert the input back to minites
+        SharedPreferences myPrefs;
+        myPrefs = getSharedPreferences("tagpage", MODE_PRIVATE);
+        SharedPreferences.Editor editor = myPrefs.edit();
+        editor.putLong("set_time", min_input);//store the time input in this round no matter finish or not
+        editor.commit();
 
 
         CD_startButton.setOnClickListener(new View.OnClickListener() {
@@ -102,11 +110,27 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 // when finish, a new sunflower is planted into the garden
                 //FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();///////////////
                 //flowerClass.increaseAliveFlowerNum();/////////////////
-                //myPrefs = getSharedPreferences("prefID", Context.MODE_PRIVATE);
-                String fnum = myPrefs.getString("alive_flower",null);
+
+                myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
+                String fnum = myPrefs.getString("alive_flower", null);
                 int num = Integer.parseInt(fnum.trim()) + 1;
+                editor = myPrefs.edit();
                 editor.putString("alive_flower", Integer.toString(num));
                 editor.apply();
+                thePrefs = getSharedPreferences("tagpage", MODE_PRIVATE);
+                long time_num = thePrefs.getLong("set_time",0);
+                String tagnow = thePrefs.getString("curr_tag",null);
+                long curr_tag_time = thePrefs.getLong(tagnow,0);
+                editor = thePrefs.edit();
+                if(curr_tag_time == 0){ //first time to select this tag
+                 editor.putLong(tagnow,time_num);
+                 editor.commit();
+                } else{ //select this tag before
+                 long total_tag_time = curr_tag_time + time_num;
+                 editor.putLong(tagnow, total_tag_time);
+                 editor.commit();
+                }
+
 
 
                 //Turn off Do not Disturb after timer ends
@@ -153,8 +177,10 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
             CD_is_timer_running = false;
             //FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();////////////////
             //flowerClass.increaseDeadFlowerNum();//////////////
+            myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
             String fnum = myPrefs.getString("alive_flower",null);
             int num = Integer.parseInt(fnum.trim()) + 1;
+            editor = myPrefs.edit();
             editor.putString("alive_flower", Integer.toString(num));
             editor.apply();
 
@@ -186,8 +212,10 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
         //flowerClass.increaseDeadFlowerNum();///////////////
         //SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
         String fnum = myPrefs.getString("dead_flower",null);
         int num = Integer.parseInt(fnum) + 1;
+        editor = myPrefs.edit();
         editor.putString("dead_flower", Integer.toString(num));
         editor.commit();
 
