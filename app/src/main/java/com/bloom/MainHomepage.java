@@ -1,14 +1,15 @@
 package com.bloom;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -39,19 +40,29 @@ public class MainHomepage extends AppCompatActivity {
             }
         });
 
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        ImageAdapter adapter = new ImageAdapter(this);
+        viewPager.setAdapter(adapter);
+
         initList();
 
-        Spinner spinnerCountries = findViewById(R.id.spinner1);
+        Spinner spinnertag = findViewById(R.id.spinner1);
 
         mAdapter = new ToDoAdapter(this, ToDoList);
-        spinnerCountries.setAdapter(mAdapter);
+        spinnertag.setAdapter(mAdapter);
 
-        spinnerCountries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnertag.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ToDoItem clickedItem = (ToDoItem) parent.getItemAtPosition(position);
-                String clickedCountryName = clickedItem.getWhatToDo();
-                //Toast.makeText(MainHomepage.this, clickedCountryName + " selected", Toast.LENGTH_SHORT).show();
+                String clickedItemName = clickedItem.getWhatToDo();
+
+                SharedPreferences myPrefs;
+                myPrefs = getSharedPreferences("tagpage", MODE_PRIVATE);
+                SharedPreferences.Editor editor = myPrefs.edit();
+                editor.putString("curr_tag", clickedItemName);//store the current last selected tag
+                editor.commit();
+                //Toast.makeText(MainHomepage.this, testdata + " selected", Toast.LENGTH_SHORT).show();*/
             }
 
             @Override

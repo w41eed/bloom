@@ -3,6 +3,8 @@ package com.bloom;
 
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -10,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Button;
 
-import java.sql.Time;
+
 import java.util.Locale;
 import android.widget.Toast;
 import android.content.Intent;
@@ -18,6 +20,8 @@ import static java.sql.Types.NULL;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static java.sql.Types.NULL;
 
 
 public class TimeCountDownActivity extends AppCompatActivity implements TimerCancelDialog.TimerCancelDialogListener {
@@ -42,6 +46,10 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     private Button CD_breakButton;
     private Timer schedule_timer; //timer for schedule tasks
     // **************
+    SharedPreferences myPrefs; //= getSharedPreferences("prefID", MODE_PRIVATE);
+    SharedPreferences.Editor editor; //editor = myPrefs.edit();;
+    SharedPreferences thePrefs;//this is for tag page
+
 
 
     @Override
@@ -53,6 +61,18 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         // *** new stuff ***
         CD_breakButton = findViewById(R.id.button_take_a_break);
         // *****************
+        myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
+        //!sharedPreferences.getString(NAME,"Default value").equals("Default value")
+        if(myPrefs.getString("alive_flower","Infinite").equals( "Infinite")) {
+            editor = myPrefs.edit();
+
+            editor.putString("alive_flower", "0");
+            editor.commit();
+            editor.putString("dead_flower", "0");
+            editor.commit();
+            //editor.putString("modify", "yes");
+            //editor.commit();
+        }
 
         //Check for dnd access
         dnd = new dndHandler(this);
@@ -71,6 +91,12 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         Intent intent = getIntent();
         long ms_input = intent.getLongExtra(Main2Activity.MIN_INPUT,0);
         set_Time_CD(ms_input);
+        long min_input = ms_input/60000; // convert the input back to minites
+        SharedPreferences myPrefs;
+        myPrefs = getSharedPreferences("tagpage", MODE_PRIVATE);
+        SharedPreferences.Editor editor = myPrefs.edit();
+        editor.putLong("set_time", min_input);//store the time input in this round no matter finish or not
+        editor.commit();
 
 
         CD_startButton.setOnClickListener(new View.OnClickListener() {
@@ -118,8 +144,30 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 //CD_time_left_in_Misecond = 0;
                 CD_textview.setText("0:00:00");
                 // when finish, a new sunflower is planted into the garden
-                FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();
-                flowerClass.increaseAliveFlowerNum();
+                //FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();///////////////
+                //flowerClass.increaseAliveFlowerNum();/////////////////
+
+                myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
+                String fnum = myPrefs.getString("alive_flower", null);
+                int num = Integer.parseInt(fnum.trim()) + 1;
+                editor = myPrefs.edit();
+                editor.putString("alive_flower", Integer.toString(num));
+                editor.apply();
+                thePrefs = getSharedPreferences("tagpage", MODE_PRIVATE);
+                long time_num = thePrefs.getLong("set_time",0);
+                String tagnow = thePrefs.getString("curr_tag",null);
+                long curr_tag_time = thePrefs.getLong(tagnow,0);
+                editor = thePrefs.edit();
+                if(curr_tag_time == 0){ //first time to select this tag
+                 editor.putLong(tagnow,time_num);
+                 editor.commit();
+                } else{ //select this tag before
+                 long total_tag_time = curr_tag_time + time_num;
+                 editor.putLong(tagnow, total_tag_time);
+                 editor.commit();
+                }
+
+
 
                 //Turn off Do not Disturb after timer ends
                 dnd.turnOffDnd();
@@ -191,9 +239,14 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
             if (this.away && !on_break) {
                 Timer.cancel();
                 CD_is_timer_running = false;
-                FlowerGlobalClass flowerClass = (FlowerGlobalClass) getApplicationContext();
-                flowerClass.increaseDeadFlowerNum();
-
+                //FlowerGlobalClass flowerClass = (FlowerGlobalClass) getApplicationContext();
+                //flowerClass.increaseDeadFlowerNum();
+                myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
+                String fnum = myPrefs.getString("alive_flower",null);
+                int num = Integer.parseInt(fnum.trim()) + 1;
+                editor = myPrefs.edit();
+                editor.putString("alive_flower", Integer.toString(num));
+                editor.apply();
                 dnd.turnOffDnd();
 
                 Intent intent = new Intent(TimeCountDownActivity.this, FlowerDeadActivity.class);
@@ -223,9 +276,16 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         Timer.cancel();
         CD_is_timer_running = false;
         set_Time_CD(0);
-        FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();
+        //FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();//////////////////////
 
-        flowerClass.increaseDeadFlowerNum();
+        //flowerClass.increaseDeadFlowerNum();///////////////
+        //SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
+        String fnum = myPrefs.getString("dead_flower",null);
+        int num = Integer.parseInt(fnum) + 1;
+        editor = myPrefs.edit();
+        editor.putString("dead_flower", Integer.toString(num));
+        editor.commit();
 
         //Turn off Do not Disturb
         dnd.turnOffDnd();
