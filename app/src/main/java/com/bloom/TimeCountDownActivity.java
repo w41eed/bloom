@@ -1,6 +1,7 @@
 package com.bloom;
 
 
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -26,6 +27,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     private boolean CD_is_timer_running;
     private long CD_time_left_in_Misecond = INIT_TIMER_IN_MISECOND;
     private dndHandler dnd;
+    private navBarListener navBar;
 
     private Timer detectAway;
     private TimerTask detectAwayTask;
@@ -44,6 +46,8 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         dnd = new dndHandler(this);
         dnd.checkDndPermission();
 
+        //add navBar listener
+        navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
 
 
 
@@ -95,7 +99,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
                 Intent intent = new Intent(TimeCountDownActivity.this, FlowerAliveActivity.class);
                 startActivity(intent);
-                overridePendingTransition(NULL, NULL);
+                overridePendingTransition(0, 0);
                 //UpdateScreen();
 
             }

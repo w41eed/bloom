@@ -57,5 +57,7 @@
         android:textColor="#616875"
         android:textSize="20sp" />
 
+    <include layout="@layout/bottom_nav_bar" />
+
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.bloom;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,11 +17,17 @@ public class MainHomepage extends AppCompatActivity {
     private ArrayList<ToDoItem> ToDoList;
     private ToDoAdapter mAdapter;
     private Button NextButton;
+    private navBarListener navBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(0, 0);
         setContentView(R.layout.activity_homepage);
+
+        //add navBar listener
+        navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
+
         NextButton = findViewById(R.id.button2);
         NextButton.setOnClickListener(new View.OnClickListener() {
             @Override

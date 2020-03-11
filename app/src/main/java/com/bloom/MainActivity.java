@@ -1,9 +1,12 @@
 package com.bloom;
 
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
@@ -16,11 +19,16 @@ import static java.sql.Types.NULL;
 
 public class MainActivity extends AppCompatActivity {
     private Button startButton;
+    private navBarListener navBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(0, 0);
         setContentView(R.layout.activity_main);
+
+
+        navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
 
         startButton = findViewById(R.id.button);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -57,5 +65,11 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityDestroyed() {
         Log.d("onDestroy", "onActivityDestroyed: ");
     }
+
+
+
+
+
+
 
 }

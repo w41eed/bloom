@@ -63,4 +63,6 @@
         android:textColor="@color/bloomGreen"
         />
 
+    <include layout="@layout/bottom_nav_bar" />
+
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.bloom;
 
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import static java.sql.Types.NULL;
 
 public class Main2Activity extends AppCompatActivity {
+    private navBarListener navBar;
 
 
     public static final String MIN_INPUT = "com.bloom.min_input";
@@ -27,6 +29,9 @@ public class Main2Activity extends AppCompatActivity {
         min_seekBar = findViewById(R.id.minute_seekBar);
         min_textView = findViewById(R.id.minute_textView);
         CD_setMinButton = findViewById(R.id.minute_button_set);
+
+        //add navBar listener
+        navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
 
         //dnd = new dndHandler(this);
         //dnd.checkDndPermission();
