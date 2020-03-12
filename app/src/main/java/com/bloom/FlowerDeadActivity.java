@@ -41,7 +41,7 @@ public class FlowerDeadActivity extends AppCompatActivity {
 
         }
 
-        //add navBar listener
+        //add navBar listene
         navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
 
        // Button GoBackToSetTime = (Button) findViewById(R.id.BackButton);
