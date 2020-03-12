@@ -1,23 +1,18 @@
 package com.bloom;
 
 
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Button;
-
 
 import java.util.Locale;
-import android.widget.Toast;
-import android.content.Intent;
-import static java.sql.Types.NULL;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -309,16 +304,41 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     }
 
     private void updateCountDownText(){
+        SharedPreferences thePrefs = getSharedPreferences("tagpage", MODE_PRIVATE);
+        String f_type = thePrefs.getString("flower_type",null);
         RelativeLayout r = findViewById(R.id.nothing);
         if ((CD_time_left_in_Misecond < (0.75) * INIT_TIMER_IN_MISECOND) &&
-                ((0.50) * INIT_TIMER_IN_MISECOND < CD_time_left_in_Misecond))
-            r.setBackgroundResource(R.drawable.sunflower_level1);
+                ((0.50) * INIT_TIMER_IN_MISECOND < CD_time_left_in_Misecond)) {
+            if (f_type == "f1") {
+                r.setBackgroundResource(R.drawable.sunflower_level1);
+            } else if (f_type == "f2") {
+                r.setBackgroundResource(R.drawable.rose_level1);
+            }
+            else if (f_type == "f3") {
+                r.setBackgroundResource(R.drawable.lily_level1);
+            }
+        }
         else if ( ((0.25) * INIT_TIMER_IN_MISECOND < CD_time_left_in_Misecond) &&
-                (CD_time_left_in_Misecond < (0.50) * INIT_TIMER_IN_MISECOND))
-            r.setBackgroundResource(R.drawable.sunflower_level2);
+                (CD_time_left_in_Misecond < (0.50) * INIT_TIMER_IN_MISECOND)) {
+            if (f_type == "f1") {
+                r.setBackgroundResource(R.drawable.sunflower_level2);
+            } else if (f_type == "f2") {
+                r.setBackgroundResource(R.drawable.rose_level2);
+            } else if (f_type == "f3") {
+                r.setBackgroundResource(R.drawable.lily_level2);
+            }
+        }
         else if ( 0 < CD_time_left_in_Misecond &&
-                (CD_time_left_in_Misecond < (0.25) * INIT_TIMER_IN_MISECOND))
-            r.setBackgroundResource(R.drawable.sunflower_level3);
+                (CD_time_left_in_Misecond < (0.25) * INIT_TIMER_IN_MISECOND)) {
+            if (f_type == "f1") {
+                r.setBackgroundResource(R.drawable.sunflower_level3);
+            } else if (f_type == "f2") {
+                r.setBackgroundResource(R.drawable.rose_level3);
+            } else if (f_type == "f3") {
+                r.setBackgroundResource(R.drawable.lily_level3);
+            }
+
+        }
         //count down in hours
         int hours = (int)(CD_time_left_in_Misecond/1000)/3600;
         //count down in minutes

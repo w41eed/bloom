@@ -28,7 +28,6 @@ public class SummaryActivity extends AppCompatActivity {
         FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplication();
         TextView text_dead = findViewById(R.id.deadFlower_TextView);
         String dfname = myPrefs.getString("dead_flower",null);
-        String mmname = myPrefs.getString("modify",null);
         String taggg = thePrefs.getString("curr_tag",null);//get the current chosen tag
         long total_taggg_time = thePrefs.getLong(taggg,0);
         text_dead.setText("You have "+dfname+" withered sunflower in your garden"/*+"modify"+mmname

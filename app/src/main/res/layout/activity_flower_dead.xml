@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sunflower_dead"
-    tools:context=".FlowerDeadActivity">
+    tools:context=".FlowerDeadActivity"
+    android:id="@+id/dead">
 
     <TextView
         android:id="@+id/DeadFlowerText"
