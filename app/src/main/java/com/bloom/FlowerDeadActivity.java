@@ -16,7 +16,7 @@ public class FlowerDeadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flower_dead);
 
-        //add navBar listener
+        //add navBar listene
         navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
 
        // Button GoBackToSetTime = (Button) findViewById(R.id.BackButton);
