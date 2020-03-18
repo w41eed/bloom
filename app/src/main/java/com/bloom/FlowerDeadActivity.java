@@ -1,5 +1,9 @@
 package com.bloom;
 
+import android.os.Build;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,17 +35,20 @@ public class FlowerDeadActivity extends AppCompatActivity {
             //RelativeLayout ll = new RelativeLayout(this);
             dd.setBackgroundResource(R.drawable.rose_dead);
             //setContentView(ll);
+        }else if(f_type == "f3") {
+                RelativeLayout dd = findViewById(R.id.dead);
+                //RelativeLayout ll = new RelativeLayout(this);
+                dd.setBackgroundResource(R.drawable.lily_dead);
+                //setContentView(ll);
 
+            }
+
+        //Change Color of StatusBar to match background
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.skyBlueDead));
         }
-        else if(f_type == "f3") {
-            RelativeLayout dd = findViewById(R.id.dead);
-            //RelativeLayout ll = new RelativeLayout(this);
-            dd.setBackgroundResource(R.drawable.lily_dead);
-            //setContentView(ll);
 
-        }
-
-        //add navBar listene
+        //add navBar listener
         navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
 
        // Button GoBackToSetTime = (Button) findViewById(R.id.BackButton);

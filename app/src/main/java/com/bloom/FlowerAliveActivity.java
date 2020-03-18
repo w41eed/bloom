@@ -1,7 +1,9 @@
 package com.bloom;
 
+import android.os.Build;
 import android.content.SharedPreferences;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +41,12 @@ public class FlowerAliveActivity extends AppCompatActivity {
             dd.setBackgroundResource(R.drawable.lily_level3);
             //setContentView(ll);
 
+        }
+
+
+        //Change Color of StatusBar to match background
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.skyBlueAlive));
         }
 
         navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);

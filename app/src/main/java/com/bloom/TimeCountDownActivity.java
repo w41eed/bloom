@@ -1,6 +1,10 @@
 package com.bloom;
 
-
+import android.graphics.Color;
+import android.os.Build;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,8 +15,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Button;
+
 
 import java.util.Locale;
+import android.widget.Toast;
+import android.content.Intent;
+import static java.sql.Types.NULL;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,7 +38,8 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     private boolean CD_is_timer_running;
     private long CD_time_left_in_Misecond = INIT_TIMER_IN_MISECOND;
     private dndHandler dnd;
-    private navBarListener navBar;
+    private navBarListener navBarListen;
+    private BottomNavigationView navBar;
 
     private Timer detectAway;
     private TimerTask detectAwayTask;
@@ -51,6 +62,13 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_count_down);
+
+        //Change Color of StatusBar to match background
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.skyBlueAlive));
+        }
+
+
         CD_textview = findViewById(R.id.count_down_timer);
         CD_startButton = findViewById(R.id.button_start_timer);
         // *** new stuff ***
@@ -74,7 +92,8 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         dnd.checkDndPermission();
 
         //add navBar listener
-        navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
+        navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        navBarListen = new navBarListener( navBar, this);
 
 
 
@@ -167,6 +186,10 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 //Turn off Do not Disturb after timer ends
                 dnd.turnOffDnd();
 
+
+                //Make NavBar visible
+                navBar.setVisibility(View.VISIBLE);
+
                 Intent intent = new Intent(TimeCountDownActivity.this, FlowerAliveActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -178,6 +201,9 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
         //Turn on Do not Disturb after timer starts
         dnd.turnOnDnd();
+
+        //Make NavBar Invsisible
+        navBar.setVisibility(View.INVISIBLE);
 
         UpdateScreen();
 
@@ -247,6 +273,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 Intent intent = new Intent(TimeCountDownActivity.this, FlowerDeadActivity.class);
                 startActivity(intent);
             }
+            dnd.turnOnDnd();
             this.stopStartDetectAwayTimer();
         }
 
@@ -257,6 +284,12 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     public void onPause() {
         super.onPause();
         if (!on_break) this.startDetectAwayTimer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        dnd.turnOffDnd();
     }
 
     private void warning_PopUp(){
@@ -284,6 +317,8 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
         //Turn off Do not Disturb
         dnd.turnOffDnd();
+        //Make NavBar visible
+        navBar.setVisibility(View.VISIBLE);
 
         Intent intent = new Intent(TimeCountDownActivity.this, FlowerDeadActivity.class);
         startActivity(intent);
