@@ -47,6 +47,11 @@ public class FlowerDeadActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.skyBlueDead));
         }
+        else {
+            RelativeLayout dd = findViewById(R.id.dead);
+            //setContentView(R.layout.activity_flower_dead);
+            dd.setBackgroundResource(R.drawable.sunflower_dead);
+        }
 
         //add navBar listener
         navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);

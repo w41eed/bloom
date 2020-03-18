@@ -74,15 +74,15 @@ public class MainHomepage extends AppCompatActivity {
 
     private void initList() {
         ToDoList = new ArrayList<>();
-        ToDoList.add(new ToDoItem("study", R.drawable.study));
-        ToDoList.add(new ToDoItem("workout", R.drawable.workout));
-        ToDoList.add(new ToDoItem("fun", R.drawable.fun));
-        ToDoList.add(new ToDoItem("meeting", R.drawable.meeting));
-        ToDoList.add(new ToDoItem("meditation", R.drawable.meditation));
-        ToDoList.add(new ToDoItem("social", R.drawable.social));
-        ToDoList.add(new ToDoItem("cook", R.drawable.cook));
-        ToDoList.add(new ToDoItem("housework", R.drawable.housework));
-        ToDoList.add(new ToDoItem("other", R.drawable.other));
+        ToDoList.add(new ToDoItem("STUDY", R.drawable.study));
+        ToDoList.add(new ToDoItem("WORKOUT", R.drawable.workout));
+        ToDoList.add(new ToDoItem("FUN", R.drawable.fun));
+        ToDoList.add(new ToDoItem("MEETING", R.drawable.meeting));
+        ToDoList.add(new ToDoItem("MEDITATION", R.drawable.meditation));
+        ToDoList.add(new ToDoItem("SOCIAL", R.drawable.social));
+        ToDoList.add(new ToDoItem("COOK", R.drawable.cook));
+        ToDoList.add(new ToDoItem("HOUSEWORK", R.drawable.housework));
+        ToDoList.add(new ToDoItem("OTHER", R.drawable.other));
 
     }
 }

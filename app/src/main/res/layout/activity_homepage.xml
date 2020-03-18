@@ -35,25 +35,29 @@
         android:id="@+id/chooseflower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="20dp"
         android:text="choose a flower type"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/viewpager"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
-        android:layout_width="396dp"
-        android:layout_height="424dp"
+        android:layout_width="145dp"
+        android:layout_height="130dp"
         android:layout_marginStart="42dp"
         android:layout_marginEnd="42dp"
-        android:layout_marginBottom="165dp"
+        android:layout_marginBottom="350dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner1">
+
+        <include layout="@layout/bottom_nav_bar" />
+    </android.support.v4.view.ViewPager>
 
     <Spinner
         android:id="@+id/spinner1"
@@ -87,7 +91,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner1" />
-
-    <include layout="@layout/bottom_nav_bar" />
 
 </android.support.constraint.ConstraintLayout>

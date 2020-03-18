@@ -352,6 +352,9 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
             else if (f_type == "f3") {
                 r.setBackgroundResource(R.drawable.lily_level1);
             }
+            else{
+                r.setBackgroundResource(R.drawable.sunflower_level1);
+            }
         }
         else if ( ((0.25) * INIT_TIMER_IN_MISECOND < CD_time_left_in_Misecond) &&
                 (CD_time_left_in_Misecond < (0.50) * INIT_TIMER_IN_MISECOND)) {
@@ -362,6 +365,9 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
             } else if (f_type == "f3") {
                 r.setBackgroundResource(R.drawable.lily_level2);
             }
+            else{
+                r.setBackgroundResource(R.drawable.sunflower_level2);
+            }
         }
         else if ( 0 < CD_time_left_in_Misecond &&
                 (CD_time_left_in_Misecond < (0.25) * INIT_TIMER_IN_MISECOND)) {
@@ -371,6 +377,9 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 r.setBackgroundResource(R.drawable.rose_level3);
             } else if (f_type == "f3") {
                 r.setBackgroundResource(R.drawable.lily_level3);
+            }
+            else{
+                r.setBackgroundResource(R.drawable.sunflower_level3);
             }
 
         }
