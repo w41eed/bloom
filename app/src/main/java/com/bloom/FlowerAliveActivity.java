@@ -40,6 +40,11 @@ public class FlowerAliveActivity extends AppCompatActivity {
             //setContentView(ll);
 
         }
+        else{
+            RelativeLayout dd = findViewById(R.id.alive);
+            //setContentView(R.layout.activity_flower_dead);
+            dd.setBackgroundResource(R.drawable.sunflower_level3);
+        }
 
         navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
 
