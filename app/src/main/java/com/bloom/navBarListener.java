@@ -19,11 +19,11 @@ public class navBarListener {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.nav_dummy:
+                    /*case R.id.nav_dummy:
                         Intent Aintent = new Intent(context, MainActivity.class);
                         context.startActivity(Aintent);
                         //context.overridePendingTransition(0, 0);
-                        break;
+                        break;*/
                     case R.id.nav_home:
                         Intent Bintent = new Intent(context, MainHomepage.class);
                         context.startActivity(Bintent);

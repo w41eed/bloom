@@ -5,7 +5,7 @@
     <item
         android:id="@+id/nav_stats"
         android:enabled="true"
-        android:title="Summary"
+        android:title="@string/summary"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_stats"
         />
@@ -14,19 +14,13 @@
     <item
         android:id="@+id/nav_home"
         android:enabled="true"
-        android:title="Home"
+        android:title="@string/home"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_home"
         />
 
 
-    <item
-        android:id="@+id/nav_dummy"
-        android:enabled="true"
-        android:title="Se"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_action_dummy"
-        />
+
 
 
 

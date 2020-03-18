@@ -6,4 +6,20 @@
     <color name="bloomGreen">#4fac5b</color>
     <color name="bloomGreenDark">#3f8b49</color>
     <color name="white">#FFFFFF</color>
+    <color name="chartBlue">#25869e</color>
+    <color name="chartPink">#c3477f</color>
+    <color name="yellow">#ffb71c</color>
+    <color name="skyBlueAlive">#89c3d8</color>
+    <color name="skyBlueDead">#1c4a5e</color>
+
+    <color name="barBlue">#4cbbeb</color>
+    <color name="barGreen">#5dd030</color>
+    <color name="barYellow">#f1de3c</color>
+    <color name="barRed">#f53f3f</color>
+    <color name="barPink">#e569a3</color>
+    <color name="barPurple">#a546b0</color>
+    <color name="barOrange">#f87934</color>
+    <color name="barDarkBlue">#293b75</color>
+    <color name="barMaroon">#87202f</color>
+
 </resources>
