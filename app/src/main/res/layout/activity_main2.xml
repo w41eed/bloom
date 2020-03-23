@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/background1"
     android:gravity="center"
-    tools:context=".Main2Activity">
+    tools:context=".Main2Activity"
+    android:orientation="vertical"
+    >
 
 
     <LinearLayout

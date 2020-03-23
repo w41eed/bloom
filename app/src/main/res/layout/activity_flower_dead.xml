@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FlowerDeadActivity"
+    android:orientation="vertical"
     android:id="@+id/dead">
 
     <TextView
@@ -28,18 +29,6 @@
         android:textColor="@android:color/white"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/SummaryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="163dp"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/custom_buttom"
-        android:text="Summary"
-        android:textColor="#158a40"
-        android:textSize="15sp" />
 
     <include layout="@layout/bottom_nav_bar" />
 
