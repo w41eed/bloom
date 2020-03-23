@@ -56,14 +56,5 @@ public class FlowerAliveActivity extends AppCompatActivity {
 
         navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
 
-        Button Summary = (Button)findViewById(R.id.SummaryButton);
-
-        Summary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FlowerAliveActivity.this, SummaryActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

@@ -56,27 +56,5 @@ public class FlowerDeadActivity extends AppCompatActivity {
         //add navBar listener
         navBar = new navBarListener( (BottomNavigationView) findViewById(R.id.navBar), this);
 
-       // Button GoBackToSetTime = (Button) findViewById(R.id.BackButton);
-        Button Summary = (Button)findViewById(R.id.SummaryButton);
-
-
-       /* GoBackToSetTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(FlowerDeadActivity.this, MainHomepage.class);
-                startActivity(intent);
-            }
-        }
-        );*/
-        Summary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FlowerDeadActivity.this, SummaryActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
     }
 }
