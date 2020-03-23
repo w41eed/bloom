@@ -1,10 +1,38 @@
 package com.bloom;
 
 import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 
 public class FlowerGlobalClass extends Application {
     private int DeadFlowerNum;
     private int AliveFlowerNum;
+    public static final String CHANNEL_ID = "timerService";
+    public static final String WAKE_LOCK_TAG = "app:myWakeLockTag";
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        createNotificationChannel();
+
+    }
+
+
+
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel serviceChannel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "Bloom",
+                    NotificationManager.IMPORTANCE_LOW
+            );
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(serviceChannel);
+        }
+    }
 
     public int getDeadFlowerNum(){
         /*
