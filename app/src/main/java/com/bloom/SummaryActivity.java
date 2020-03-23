@@ -136,7 +136,7 @@ public class SummaryActivity extends AppCompatActivity {
         setBarChartColors();
 
         BarChart barChart = (BarChart)findViewById(R.id.barChart);
-        act = new String[]{"study", "workout", "fun", "meet", "meditate", "social"};
+        act = new String[]{"Study", "Workout", "Fun", "Meet", "Meditate", "Social"};
         BarDataSet barDataSet = new BarDataSet(getTime(), null);
         barDataSet.setBarBorderWidth(0f);
         barDataSet.setValueTextColor(Color.WHITE);
@@ -173,12 +173,12 @@ public class SummaryActivity extends AppCompatActivity {
     private ArrayList getTime(){
 
         ArrayList<BarEntry> tagTime = new ArrayList<>();
-        tagTime.add(new BarEntry(0f, thePrefs.getLong(act[0],0)));
-        tagTime.add(new BarEntry(1f, thePrefs.getLong(act[1],0)));
-        tagTime.add(new BarEntry(2f, thePrefs.getLong(act[2],0)));
-        tagTime.add(new BarEntry(3f, thePrefs.getLong("meeting",0)));
-        tagTime.add(new BarEntry(4f, thePrefs.getLong("meditation",0)));
-        tagTime.add(new BarEntry(5f, thePrefs.getLong(act[5],0)));
+        tagTime.add(new BarEntry(0f, thePrefs.getLong("STUDY",0)));
+        tagTime.add(new BarEntry(1f, thePrefs.getLong("WORKOUT",0)));
+        tagTime.add(new BarEntry(2f, thePrefs.getLong("FUN",0)));
+        tagTime.add(new BarEntry(3f, thePrefs.getLong("MEETING",0)));
+        tagTime.add(new BarEntry(4f, thePrefs.getLong("MEDITATION",0)));
+        tagTime.add(new BarEntry(5f, thePrefs.getLong("SOCIAL",0)));
         /*tagTime.add(new BarEntry(5f, thePrefs.getLong(act[6],0)));
         tagTime.add(new BarEntry(5f, thePrefs.getLong(act[7],0)));
         tagTime.add(new BarEntry(5f, thePrefs.getLong(act[8],0)));*/
