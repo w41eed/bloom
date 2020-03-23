@@ -30,7 +30,7 @@ public class ImageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(final ViewGroup container, final int position) {
         final ImageView imageView = new ImageView(mContext);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         imageView.setImageResource(ImageId[position]);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
