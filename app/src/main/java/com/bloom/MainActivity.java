@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button startButton;
     private navBarListener navBar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
     long userInteractionTime = 0;

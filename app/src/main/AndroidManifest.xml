@@ -17,8 +17,7 @@
         android:theme="@style/AppTheme">
 
         <service android:name=".timerService"></service>
-
-
+        <activity android:name=".genfencing"></activity>
         <activity android:name=".MainHomepage"></activity>
 
 
