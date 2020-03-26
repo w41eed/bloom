@@ -19,6 +19,7 @@ public class MainHomepage extends AppCompatActivity {
     private ToDoAdapter mAdapter;
     private Button NextButton;
     private navBarListener navBar;
+    private Button LocationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,17 @@ public class MainHomepage extends AppCompatActivity {
             public void onClick(View view) {
                 // open a new activity
                 Intent intent = new Intent(MainHomepage.this, Main2Activity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        LocationButton = findViewById(R.id.button_location);
+        LocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // open a new activity
+                Intent intent = new Intent(MainHomepage.this, genfencing.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }

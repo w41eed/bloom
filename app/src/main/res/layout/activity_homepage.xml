@@ -31,6 +31,8 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
+
+
     <TextView
         android:id="@+id/chooseflower"
         android:layout_width="wrap_content"
@@ -86,10 +88,28 @@
         android:layout_marginBottom="60dp"
         android:background="@drawable/home_button"
         android:text="next"
+        android:textSize="20sp"
         android:textColor="@color/bloomGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+
+    <Button
+        android:id="@+id/button_location"
+        android:layout_width="222dp"
+        android:layout_height="56dp"
+        android:background="@drawable/custom_buttom"
+        android:text="Add Current Location"
+        android:textAllCaps="false"
+        android:textColor="#158a40"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.673" />
+
 
 </android.support.constraint.ConstraintLayout>
