@@ -4,19 +4,28 @@ import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
+import android.os.Bundle;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.LocationServices;
 
 public class FlowerGlobalClass extends Application {
     private int DeadFlowerNum;
     private int AliveFlowerNum;
     public static final String CHANNEL_ID = "timerService";
     public static final String WAKE_LOCK_TAG = "app:myWakeLockTag";
+    private GeofencingClient geofencingClient;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         createNotificationChannel();
+        geofencingClient = LocationServices.getGeofencingClient(this);
+    }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        geofencingClient = LocationServices.getGeofencingClient(this);
     }
 
 
