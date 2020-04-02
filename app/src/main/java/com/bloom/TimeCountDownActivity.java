@@ -143,7 +143,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                     start_Timer();
 
                     //Start Service so app runs in background
-                    Intent servIntent = new Intent(TimeCountDownActivity.this, timerService.class);
+                    //Intent servIntent = new Intent(TimeCountDownActivity.this, timerService.class);
 
 
                     //acquire Wake lock

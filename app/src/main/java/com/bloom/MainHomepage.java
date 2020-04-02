@@ -97,5 +97,14 @@ public class MainHomepage extends AppCompatActivity {
         ToDoList.add(new ToDoItem("OTHER", R.drawable.other));
 
     }
+
+
+
+    //Geofence shit
+
+
+
+
+
 }
 

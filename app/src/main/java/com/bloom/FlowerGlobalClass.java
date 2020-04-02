@@ -3,7 +3,9 @@ package com.bloom;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+
 import android.os.Build;
+
 
 public class FlowerGlobalClass extends Application {
     private int DeadFlowerNum;
@@ -11,13 +13,52 @@ public class FlowerGlobalClass extends Application {
     public static final String CHANNEL_ID = "timerService";
     public static final String WAKE_LOCK_TAG = "app:myWakeLockTag";
 
+    /*private GeofencingClient geofencingClient;*/
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         createNotificationChannel();
 
+        /*geofencingClient = LocationServices.getGeofencingClient(this);
+
+
+
+        Geofence geofence = new Geofence.Builder()
+                .setRequestId("test") // Geofence ID
+                .setCircularRegion( 43.4816742, -80.5261954, 100) // defining fence region
+                .setExpirationDuration(86400000) // expiring date
+                // Transition types that it should look for
+                .setTransitionTypes( Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT )
+                .build();
+
+
+        GeofencingRequest request = new GeofencingRequest.Builder()
+                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+                .addGeofence(geofence)
+                .build();
+
+        createGeofencePendingIntent();*/
+
+
     }
+
+/*
+
+    private PendingIntent geoFencePendingIntent;
+    private final int GEOFENCE_REQ_CODE = 0;
+    private PendingIntent createGeofencePendingIntent() {
+        Log.d(TAG, "createGeofencePendingIntent");
+        if ( geoFencePendingIntent != null )
+            return geoFencePendingIntent;
+
+        Intent intent = new Intent( this, GeofenceReceiver.class);
+        return PendingIntent.getService(
+                this, GEOFENCE_REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT );
+    }
+
+*/
 
 
 
@@ -33,6 +74,8 @@ public class FlowerGlobalClass extends Application {
             manager.createNotificationChannel(serviceChannel);
         }
     }
+
+
 
     public int getDeadFlowerNum(){
         /*
