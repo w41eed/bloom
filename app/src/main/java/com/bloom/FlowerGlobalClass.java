@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Build;
 import android.util.Log;
 
@@ -30,21 +31,7 @@ public class FlowerGlobalClass extends Application {
         geofencingClient = LocationServices.getGeofencingClient(this);
 
 
-        Geofence geofence = new Geofence.Builder()
-                .setRequestId("test") // Geofence ID
-                .setCircularRegion( 43.4816742, -80.5261954, 50) // defining fence region
-                .setExpirationDuration(86400000) // expiring date
-                // Transition types that it should look for
-                .setTransitionTypes( Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT )
-                .setLoiteringDelay(10000)
-                .build();
 
-        GeofencingRequest request = new GeofencingRequest.Builder()
-                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
-                .addGeofence(geofence)
-                .build();
-
-        createGeofencePendingIntent();
 
     }
 
@@ -72,6 +59,25 @@ public class FlowerGlobalClass extends Application {
                 this, GEOFENCE_REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT );
     }
 
+
+    public void addGeofence(Location loc){
+
+        Geofence geofence = new Geofence.Builder()
+                .setRequestId("test") // Geofence ID
+                .setCircularRegion( loc.getLatitude(), loc.getLongitude(), 50) // defining fence region
+                .setExpirationDuration(86400000) // expiring date
+                // Transition types that it should look for
+                .setTransitionTypes( Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT )
+                .setLoiteringDelay(10000)
+                .build();
+
+        GeofencingRequest request = new GeofencingRequest.Builder()
+                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+                .addGeofence(geofence)
+                .build();
+
+        createGeofencePendingIntent();
+    }
 
     public int getDeadFlowerNum(){
         /*

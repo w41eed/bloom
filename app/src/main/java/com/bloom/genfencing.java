@@ -20,6 +20,8 @@ import android.widget.ImageView;
 
 import android.location.LocationListener;
 
+import  com.bloom.FlowerGlobalClass;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -39,15 +41,14 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
     private ImageView m_addLocation;
     private ArrayList<locationItem> location_list;
 
-    private LocationListener mLocListener;
     private LocationManager mLocManager;
     private Location currentLoc;
     private long LOCATION_REFRESH_TIME = 300000;
     private float LOCATION_REFRESH_DISTANCE = 10;
 
     private FusedLocationProviderClient mFusedLocClient;
+    private FlowerGlobalClass fgc;
 
-    public String locationChanged = "Hasn't changed";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
             }
         });
 
-
+        fgc = (FlowerGlobalClass) getApplicationContext();
 
         m_recyclerView = findViewById(R.id.recyclerview_location);
         m_recyclerView.setHasFixedSize(true);
@@ -146,6 +147,8 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
         // for now just add a random location, later will be change to current location
         requestNewLocationData();
 
+         fgc.addGeofence(currentLoc);
+
         String latlong = String.valueOf(currentLoc.getLatitude()).concat(" , ").concat(String.valueOf(currentLoc.getLongitude()));
 
         locationItem item = new locationItem(label, latlong );
@@ -154,9 +157,6 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
     }
 
 
-    public void setCurrentloc(Location loc){
-        currentLoc = loc;
-    }
 
 }
 
