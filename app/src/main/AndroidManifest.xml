@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".FlowerGlobalClass"
@@ -19,6 +21,8 @@
         <service android:name=".timerService"></service>
         <activity android:name=".genfencing"></activity>
         <activity android:name=".MainHomepage"></activity>
+
+        <receiver android:name=".GeofenceReceiver"></receiver>
 
 
         <activity android:name=".SummaryActivity"></activity>

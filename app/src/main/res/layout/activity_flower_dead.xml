@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".FlowerDeadActivity"
     android:orientation="vertical"
-    android:id="@+id/dead">
+    android:id="@+id/dead"
+    android:background="@drawable/sunflower_dead">
 
     <TextView
         android:id="@+id/DeadFlowerText"
