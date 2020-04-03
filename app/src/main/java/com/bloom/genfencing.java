@@ -1,6 +1,8 @@
 package com.bloom;
 
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -31,6 +33,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 
 public class genfencing extends AppCompatActivity implements LabelDialog.LabelDialogListener {
@@ -50,6 +54,9 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
     private FlowerGlobalClass fgc;
 
 
+    private Geocoder geocoder;
+    private List<Address> address = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +71,6 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
                 //open dialog and get label information from users
                 LabelDialog ld = new LabelDialog();
                 ld.show(getSupportFragmentManager(), "label dialog");
-
 
 
             }
@@ -107,13 +113,11 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
         );
 
 
-
-
     }
 
 
     //to check for nw location if current location is null
-    private void requestNewLocationData(){
+    private void requestNewLocationData() {
 
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -142,6 +146,24 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
 
 
 
+    private String getAddress() {
+
+
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+
+        try {
+            address = geocoder.getFromLocation(currentLoc.getLatitude(), currentLoc.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        } catch (Exception e) { }
+
+
+        String Labeladdress = address.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+        //String city = address.get(0).getLocality();
+
+        return Labeladdress;
+
+    }
+
     @Override
     public void addLabel(String label) {
         // for now just add a random location, later will be change to current location
@@ -151,7 +173,7 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
 
         String latlong = String.valueOf(currentLoc.getLatitude()).concat(" , ").concat(String.valueOf(currentLoc.getLongitude()));
 
-        locationItem item = new locationItem(label, latlong );
+        locationItem item = new locationItem(label, getAddress());
         location_list.add(item);
         m_Adapter.notifyDataSetChanged();
     }
