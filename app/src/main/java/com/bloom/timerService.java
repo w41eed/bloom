@@ -11,9 +11,6 @@ import static com.bloom.FlowerGlobalClass.CHANNEL_ID;
 
 public class timerService extends Service {
 
-
-
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent){
@@ -30,8 +27,6 @@ public class timerService extends Service {
     public void onDestroy() {
         super.onDestroy();
     }
-
-
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {

@@ -74,7 +74,6 @@ public class MainHomepage extends AppCompatActivity {
                 SharedPreferences.Editor editor = myPrefs.edit();
                 editor.putString("curr_tag", clickedItemName);//store the current last selected tag
                 editor.commit();
-                //Toast.makeText(MainHomepage.this, testdata + " selected", Toast.LENGTH_SHORT).show();*/
             }
 
             @Override

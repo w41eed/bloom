@@ -10,9 +10,6 @@ import static java.sql.Types.NULL;
 
 
 
-
-
-
     public class dndHandler {
 
         private boolean dndPermission;

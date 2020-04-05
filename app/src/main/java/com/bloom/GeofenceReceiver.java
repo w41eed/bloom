@@ -16,19 +16,9 @@ public class GeofenceReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent){
-
         this.context = context;
-
-        /*GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
-        if(geofencingEvent.hasError()){
-        }
-        else {
-
-        }*/
-
         geofenceNotification();
     }
-
 
     //Send Notification to user asking if they want to start a timer
     public void geofenceNotification(){

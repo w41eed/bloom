@@ -9,10 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -20,16 +18,12 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SummaryActivity extends AppCompatActivity {
     private navBarListener navBar;
@@ -69,16 +63,14 @@ public class SummaryActivity extends AppCompatActivity {
 
     }
 
-    public void goHome(View view){
+    public void goHome(View view) {
         Intent intent = new Intent(SummaryActivity.this, MainHomepage.class);
         startActivity(intent);
         overridePendingTransition(0,0);
     }
 
     //Creates the piechart displaying dead vs alive flowers
-    public void pieChartBuilder(){
-
-
+    public void pieChartBuilder() {
         //intialize colors for pieChart
         ArrayList chartColors = new ArrayList();
         chartColors.add(ContextCompat.getColor(this, R.color.chartPink));
@@ -109,7 +101,6 @@ public class SummaryActivity extends AppCompatActivity {
         //Set pieChart Color
         pieDataSet.setColors(chartColors);
         pieChart.setDrawHoleEnabled(true);
-        //pieChart.setTransparentCircleRadius(pieChart.getHoleRadius());
         pieChart.setHoleColor(0);
         pieChart.setDrawEntryLabels(false);
         pieChart.setTouchEnabled(false);
@@ -131,7 +122,7 @@ public class SummaryActivity extends AppCompatActivity {
 
 
     //Creates the barChart displaying time spent on each activity type
-    public void barChartBuilder(){
+    public void barChartBuilder() {
 
         setBarChartColors();
 
@@ -170,7 +161,7 @@ public class SummaryActivity extends AppCompatActivity {
 
 
     //retrieves time spent on each activity from storage
-    private ArrayList getTime(){
+    private ArrayList getTime() {
 
         ArrayList<BarEntry> tagTime = new ArrayList<>();
         tagTime.add(new BarEntry(0f, thePrefs.getLong("STUDY",0)));
@@ -179,10 +170,6 @@ public class SummaryActivity extends AppCompatActivity {
         tagTime.add(new BarEntry(3f, thePrefs.getLong("MEETING",0)));
         tagTime.add(new BarEntry(4f, thePrefs.getLong("MEDITATION",0)));
         tagTime.add(new BarEntry(5f, thePrefs.getLong("SOCIAL",0)));
-        /*tagTime.add(new BarEntry(5f, thePrefs.getLong(act[6],0)));
-        tagTime.add(new BarEntry(5f, thePrefs.getLong(act[7],0)));
-        tagTime.add(new BarEntry(5f, thePrefs.getLong(act[8],0)));*/
-
 
         return tagTime;
     }
@@ -191,7 +178,7 @@ public class SummaryActivity extends AppCompatActivity {
 
 
     //Add my own colors
-    private void setBarChartColors(){
+    private void setBarChartColors() {
         barChartColors = new ArrayList<>();
         barChartColors.add(ContextCompat.getColor(this, R.color.barGreen));
         barChartColors.add(ContextCompat.getColor(this, R.color.barBlue));

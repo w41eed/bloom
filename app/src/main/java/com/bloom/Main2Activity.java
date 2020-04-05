@@ -84,7 +84,7 @@ public class Main2Activity extends AppCompatActivity {
             return;
         }
         //receive input and convert minutes to ms
-        long ms_input = (long)seekBarValue * 60 * 1000;
+        long ms_input = (long)seekBarValue * 600 * 1000;
 
 
         intent.putExtra(MIN_INPUT, ms_input);

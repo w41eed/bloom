@@ -1,9 +1,7 @@
 package com.bloom;
 
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.PowerManager;
 import android.support.design.widget.BottomNavigationView;
@@ -15,27 +13,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Button;
 
 
 import java.util.Locale;
-import android.widget.Toast;
-import android.content.Intent;
 
 import static com.bloom.FlowerGlobalClass.CHANNEL_ID;
-import static com.bloom.FlowerGlobalClass.WAKE_LOCK_TAG;
 import static java.sql.Types.NULL;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static java.sql.Types.NULL;
 
 
 public class TimeCountDownActivity extends AppCompatActivity implements TimerCancelDialog.TimerCancelDialogListener {
@@ -56,8 +47,6 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     private final long COME_BACK_OR_ELSE_MS = 2000;
     private boolean on_break;
     private boolean isScreenOn;
-
-
 
     private PowerManager pm;
     private PowerManager.WakeLock wl;
@@ -91,7 +80,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         // *****************
         myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
         //!sharedPreferences.getString(NAME,"Default value").equals("Default value")
-        if(myPrefs.getString("alive_flower","Infinite").equals( "Infinite")) {
+        if (myPrefs.getString("alive_flower","Infinite").equals( "Infinite")) {
             editor = myPrefs.edit();
 
             editor.putString("alive_flower", "0");
@@ -112,12 +101,11 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
         //Initialize stuff for Wake Lock
         pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        //wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, WAKE_LOCK_TAG);
         isScreenOn = pm.isInteractive();
 
 
         //Change Status bar color to match background
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
@@ -141,14 +129,8 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 }
                 else {
                     start_Timer();
-
                     //Start Service so app runs in background
                     Intent servIntent = new Intent(TimeCountDownActivity.this, timerService.class);
-
-
-                    //acquire Wake lock
-                    //wl.acquire();
-
                 }
 
             }
@@ -161,14 +143,9 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 if (CD_is_timer_running){ //if timer is running while click break button: take a break for 5 mins
                     //if timer is already paused and click break button: nothing happens
                     take_a_break();
-
                 }
-
             }
         });
-
-        // *****************
-
     }
 
 
@@ -180,18 +157,13 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 CD_time_left_in_Misecond = l;
                 //update count down text
                 updateCountDownText();
-
-
             }
 
             @Override
             public void onFinish() {
                 CD_is_timer_running = false;
-                //CD_time_left_in_Misecond = 0;
                 CD_textview.setText("0:00:00");
                 // when finish, a new sunflower is planted into the garden
-                //FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();///////////////
-                //flowerClass.increaseAliveFlowerNum();/////////////////
 
                 myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
                 String fnum = myPrefs.getString("alive_flower", null);
@@ -213,11 +185,8 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                  editor.commit();
                 }
 
-
-
                 //Turn off Do not Disturb after timer ends
                 dnd.turnOffDnd();
-
 
                 //Make NavBar visible
                 navBar.setVisibility(View.VISIBLE);
@@ -229,8 +198,6 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 Intent intent = new Intent(TimeCountDownActivity.this, FlowerAliveActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
-                //UpdateScreen();
-
             }
         }.start(); //as soon as start button is clicked,  new timer is created and start to count down
         CD_is_timer_running = true;
@@ -242,8 +209,6 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         navBar.setVisibility(View.INVISIBLE);
 
         UpdateScreen();
-
-
     }
 
     // When you hit dat break button
@@ -263,13 +228,12 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                     @Override
                     public void run() {
                         on_break = false;
+                        startDetectAwayTimer();
                         start_Timer();
                     }
                 });
             }
-        },10000);
-
-
+        },300000);
     }
 
     //Timer starts to keep track for how long the user has left the activity
@@ -294,13 +258,10 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     @Override
     public void onResume() {
         super.onResume();
-        //isScreenOn = pm.isInteractive();
         if(CD_is_timer_running) {
             if (this.away && !on_break && isScreenOn) {
                 Timer.cancel();
                 CD_is_timer_running = false;
-                //FlowerGlobalClass flowerClass = (FlowerGlobalClass) getApplicationContext();
-                //flowerClass.increaseDeadFlowerNum();
                 myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
                 String fnum = myPrefs.getString("alive_flower",null);
                 int num = Integer.parseInt(fnum.trim()) + 1;
@@ -308,11 +269,6 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 editor.putString("alive_flower", Integer.toString(num));
                 editor.apply();
                 dnd.turnOffDnd();
-
-                //Release WakeLock
-                //wl.release();
-
-
                 Intent intent = new Intent(TimeCountDownActivity.this, FlowerDeadActivity.class);
                 startActivity(intent);
             }
@@ -340,12 +296,8 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
 
     //When user wants to cancel the timer and murder a flower
     private void warning_PopUp(){
-
-
-        // UpdateScreen();
         TimerCancelDialog dialog = new TimerCancelDialog();
         dialog.show(getSupportFragmentManager(),"timer cancel dialog");
-
     }
 
     //When user clicks Yes on the cancel dialog
@@ -353,10 +305,6 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         Timer.cancel();
         CD_is_timer_running = false;
         set_Time_CD(0);
-        //FlowerGlobalClass flowerClass = (FlowerGlobalClass)getApplicationContext();//////////////////////
-
-        //flowerClass.increaseDeadFlowerNum();///////////////
-        //SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
         String fnum = myPrefs.getString("dead_flower",null);
         int num = Integer.parseInt(fnum) + 1;
@@ -368,9 +316,6 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         dnd.turnOffDnd();
         //Make NavBar visible
         navBar.setVisibility(View.VISIBLE);
-
-        //Release lock
-        //wl.release();
 
         Intent intent = new Intent(TimeCountDownActivity.this, FlowerDeadActivity.class);
         startActivity(intent);
@@ -386,9 +331,6 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
     private void reset_Timer(){
         CD_time_left_in_Misecond = INIT_TIMER_IN_MISECOND;
         updateCountDownText();
-        // CD_resetButton.setVisibility(View.INVISIBLE);
-        // CD_startButton.setVisibility(View.VISIBLE);
-
     }
 
     //Updates the screen backgrounds and timer view when timer is running
@@ -402,15 +344,12 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 r.setBackgroundResource(R.drawable.sunflower_level1);
             } else if (f_type == "f2") {
                 r.setBackgroundResource(R.drawable.rose_level1);
-            }
-            else if (f_type == "f3") {
+            } else if (f_type == "f3") {
                 r.setBackgroundResource(R.drawable.lily_level1);
-            }
-            else{
+            } else {
                 r.setBackgroundResource(R.drawable.sunflower_level1);
             }
-        }
-        else if ( ((0.25) * INIT_TIMER_IN_MISECOND < CD_time_left_in_Misecond) &&
+        } else if ( ((0.25) * INIT_TIMER_IN_MISECOND < CD_time_left_in_Misecond) &&
                 (CD_time_left_in_Misecond < (0.50) * INIT_TIMER_IN_MISECOND)) {
             if (f_type == "f1") {
                 r.setBackgroundResource(R.drawable.sunflower_level2);
@@ -418,8 +357,7 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 r.setBackgroundResource(R.drawable.rose_level2);
             } else if (f_type == "f3") {
                 r.setBackgroundResource(R.drawable.lily_level2);
-            }
-            else{
+            } else {
                 r.setBackgroundResource(R.drawable.sunflower_level2);
             }
         }
@@ -431,11 +369,9 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 r.setBackgroundResource(R.drawable.rose_level3);
             } else if (f_type == "f3") {
                 r.setBackgroundResource(R.drawable.lily_level3);
-            }
-            else{
+            } else {
                 r.setBackgroundResource(R.drawable.sunflower_level3);
             }
-
         }
         //count down in hours
         int hours = (int)(CD_time_left_in_Misecond/1000)/3600;
@@ -445,31 +381,17 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
         int seconds = (int)(CD_time_left_in_Misecond/1000)%60;
         String time_shown = String.format(Locale.getDefault(), "%d:%02d:%02d", hours,mins, seconds);
         CD_textview.setText(time_shown);
-
-
     }
+
     private void UpdateScreen(){
         if (CD_is_timer_running){
-
             CD_startButton.setText("CANCEL");
             CD_startButton.setVisibility(View.VISIBLE);
-
         }
         else { //the only case for not running: time = 0
-            // CD_startButton.setText("START");
-
-            //time = 0
-            //  if(CD_time_left_in_Misecond < 1000){
             CD_startButton.setVisibility(View.INVISIBLE);
-
-            // } else {
-            //  CD_startButton.setVisibility(View.VISIBLE);
-            // }
-
-
         }
     }
-
 
 
     //Send Notification to user that timer has ended
@@ -502,6 +424,4 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
             Thread.currentThread().interrupt();
         }
     }
-
-
 }

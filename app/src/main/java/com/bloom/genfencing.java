@@ -1,28 +1,18 @@
 package com.bloom;
 
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-
-import android.location.LocationListener;
-
-import  com.bloom.FlowerGlobalClass;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -71,8 +61,6 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
                 //open dialog and get label information from users
                 LabelDialog ld = new LabelDialog();
                 ld.show(getSupportFragmentManager(), "label dialog");
-
-
             }
         });
 
@@ -111,8 +99,6 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
                     }
                 }
         );
-
-
     }
 
 
@@ -147,15 +133,10 @@ public class genfencing extends AppCompatActivity implements LabelDialog.LabelDi
 
 
     private String getAddress() {
-
-
         geocoder = new Geocoder(this, Locale.getDefault());
-
-
         try {
             address = geocoder.getFromLocation(currentLoc.getLatitude(), currentLoc.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
         } catch (Exception e) { }
-
 
         String Labeladdress = address.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
         //String city = address.get(0).getLocality();
