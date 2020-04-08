@@ -263,10 +263,13 @@ public class TimeCountDownActivity extends AppCompatActivity implements TimerCan
                 Timer.cancel();
                 CD_is_timer_running = false;
                 myPrefs = getSharedPreferences("prefID", MODE_PRIVATE);
-                String fnum = myPrefs.getString("alive_flower",null);
-                int num = Integer.parseInt(fnum.trim()) + 1;
+                String fnum = myPrefs.getString("dead_flower",null);
+
+                int num = Integer.parseInt(fnum) + 1;
                 editor = myPrefs.edit();
-                editor.putString("alive_flower", Integer.toString(num));
+                editor.putString("dead_flower", Integer.toString(num));
+
+
                 editor.apply();
                 dnd.turnOffDnd();
                 Intent intent = new Intent(TimeCountDownActivity.this, FlowerDeadActivity.class);
